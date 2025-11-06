@@ -30,7 +30,7 @@ program call_cLLSM
   if(i .eq. 1) cusp = .true. ! add r^{l+1} is cGTOs
   print *, " add r^{l+1} ?", cusp
 
-  allocate( expo(ng,0:l_max) )
+  allocate(expo(ng,0:l_max))
   do l = 0, l_max
     write(charI, '(I5)') l
     write(name_file, '("../cGTOs/expo/set_3/expo_l", A, ".txt")') trim(adjustl(charI))
@@ -42,14 +42,14 @@ program call_cLLSM
     close(11)
   enddo
 
-  allocate( rgrid(npt) )
+  allocate(rgrid(npt))
   open(unit = 11, file="my_grid.dat", action="read")
     do i = 1, npt
       read(11,*) rgrid(i)
     enddo
   close(11)
 
-  allocate( F(npt,nk,0:l_max) )
+  allocate(F(npt,nk,0:l_max))
   do l = 0, l_max
     write(charI, '(I5)') l
     write(name_file, '("radfunc_l", A, ".dat")') trim(adjustl(charI))
@@ -63,14 +63,14 @@ program call_cLLSM
   enddo
 
 
-  allocate( coeff(ng,nk,0:l_max) )
+  allocate(coeff(ng,nk,0:l_max))
   ! u_l = r^{nl+1} sum_i c_i exp(-alpha_i r^2)
   do l = 0, l_max
     call cLLSM(nk, ng, npt, l, rgrid, expo(:,l), F(:,:,l), coeff(:,:,l), cusp)
   enddo
 
 
-  allocate( Fit(npt,nk,0:l_max), er(npt,nk,0:l_max) )
+  allocate(Fit(npt,nk,0:l_max), er(npt,nk,0:l_max))
   do l = 0, l_max
     do k = 1, nk
       do j = 1, npt
@@ -122,7 +122,7 @@ program call_cLLSM
 
   enddo
 
-  deallocate( rgrid, expo, coeff, F, Fit, er )
+  deallocate(rgrid, expo, coeff, F, Fit, er)
 
 end program call_cLLSM
 
@@ -182,7 +182,7 @@ subroutine cLLSM(nk, ng, npt, nl, rgrid, expo, F, coeff, cusp)
   allocate( S(ng), Work(LworK), Rwork(Lrwork), Iwork(Liwork) )
   call ZGELSD(npt, ng, nk, AA, npt, Fout, npt, S, rcond, rank, Work, LworK, &
        RWork, Iwork, info)
-  deallocate( AA, S, Work, Rwork, Iwork )
+  deallocate(AA, S, Work, Rwork, Iwork)
 
   if( info .ne. 0 ) then
     write(*,*) 'ZGELSD in cLLSM subroutine: info != 0'
@@ -191,7 +191,7 @@ subroutine cLLSM(nk, ng, npt, nl, rgrid, expo, F, coeff, cusp)
 
   ! optimised linear coefficients
   coeff(1:ng,1:nk) = Fout(1:ng,1:nk)
-  deallocate( Fout )
+  deallocate(Fout)
 
 end subroutine cLLSM
 

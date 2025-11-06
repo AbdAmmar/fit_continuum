@@ -2,7 +2,7 @@
 import os
 import numpy as np
 
-from utils import continuum_dir#, plot_func
+from utils import continuum_dir
 
 
 def radial_inputfiles(nke_max, Ee_grid, l_max, eps, rxV_grid, rxV, Rgrid):
@@ -28,7 +28,7 @@ def radial_inputfiles(nke_max, Ee_grid, l_max, eps, rxV_grid, rxV, Rgrid):
                 f.write('2\n')
                 # energy      momentum    tolerance for RADIAL
                 Ee = Ee_grid[i]
-                f.write('{:e} {:d} {:e}\n'.format(Ee,l,eps))
+                f.write('{:e} {:d} {:e}\n'.format(Ee, l, eps))
                 # name of output script of function
                 f_name = 'l' + str(l)
                 f.write('{}_k{}.dat\n'.format(f_name,i+1))
