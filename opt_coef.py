@@ -4,9 +4,9 @@ from INPUT_OPT import ng, Rmax_fit, cusp
 from INPUT_OPT import l_max, nke_max, ke_grid, Ee_grid
 from INPUT_OPT import pot_type
 
-from potent_model import generate_coulomb
-from solve_radial import radial_inputfiles, execute_radial, get_radial_fcts, man_rad, plot_rad_func
-from solve_cLLSM import run_cLLSM
+from utils.potent_model import generate_coulomb
+from utils.solve_radial import radial_inputfiles, execute_radial, get_radial_fcts, man_rad, plot_rad_func
+from utils.solve_cLLSM import run_cLLSM
 
 import numpy as np
 import time
