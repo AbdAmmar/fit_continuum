@@ -1,0 +1,58 @@
+  Enter the (path-)filename of the input potential file ...
+    (2 columns with values of R and R*V(R), free format)
+
+ # Input potential file: potential_1T2x.dat  
+
+ # Potential grid. Number of radii = 3871
+ # Spline interpolation error =  3.6E-04
+ # Range of the potential =  8.5E+00
+
+ # Delta_infty =  1.000000000000000E+35
+
+  The user grid can be read from a file (single column, increasing radii)
+  or determined automatically. If you wish to use a prepared grid, enter
+  the file name, otherwise type 'n' ...
+   
+  Select one option ...
+    1: Schrodinger bound state,   2: Schrodinger free state,
+    3: Dirac bound state,         4: Dirac free state.
+    5: Quantum defect.
+   
+  Enter E, L and EPS ...
+ # **** Schrodinger Eq. Numerical potential.
+ #      Input potential file: potential_1T2x.dat  
+ #      Free state: E= 4.409917E-01, L=   0  (EPS= 1.0E-15)
+ #        Inner phase shift= 2.653020221266858E+00
+ #      Coulomb phase shift=-5.989333722509348E+00  (ETA=-1.064833E+00)
+ #      Matching radius: RAD(  850)= 8.490000000000000E+00
+   
+  Select one option ...
+    1: Schrodinger bound state,   2: Schrodinger free state,
+    3: Dirac bound state,         4: Dirac free state.
+    5: Quantum defect.
+   
+  Enter E, L and EPS ...
+ # **** Schrodinger Eq. Numerical potential.
+ #      Input potential file: potential_1T2x.dat  
+ #      Free state: E= 1.359724E+00, L=   0  (EPS= 1.0E-15)
+ #        Inner phase shift= 2.493277123696288E+00
+ #      Coulomb phase shift= 2.742930388807551E-01  (ETA=-6.064170E-01)
+ #      Matching radius: RAD(  850)= 8.490000000000000E+00
+   
+  Select one option ...
+    1: Schrodinger bound state,   2: Schrodinger free state,
+    3: Dirac bound state,         4: Dirac free state.
+    5: Quantum defect.
+   
+  Enter E, L and EPS ...
+ # **** Schrodinger Eq. Numerical potential.
+ #      Input potential file: potential_1T2x.dat  
+ #      Free state: E= 2.719449E+00, L=   0  (EPS= 1.0E-15)
+ #        Inner phase shift= 2.280131353017022E+00
+ #      Coulomb phase shift= 2.185892408372161E-01  (ETA=-4.288015E-01)
+ #      Matching radius: RAD(  850)= 8.490000000000000E+00
+   
+  Select one option ...
+    1: Schrodinger bound state,   2: Schrodinger free state,
+    3: Dirac bound state,         4: Dirac free state.
+    5: Quantum defect.

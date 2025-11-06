@@ -1,0 +1,23 @@
+
+ # Input potential file: potential_2A1.dat   
+ # Potential grid. Number of radii = 3871
+ # Spline interpolation error =  3.5E-04
+ # Range of the potential =  8.3E+00
+   
+ # **** Schrodinger Eq. Numerical potential.
+ #      Input potential file: potential_2A1.dat   
+ #      Free state: E= 4.409917E-01, L=   5  (EPS= 1.0E-15)
+ #        Inner phase shift= 2.911444396080043E-03
+ #      Coulomb phase shift=-1.823268190079425E+00  (ETA=-1.064839E+00)
+   
+ # **** Schrodinger Eq. Numerical potential.
+ #      Input potential file: potential_2A1.dat   
+ #      Free state: E= 1.359724E+00, L=   5  (EPS= 1.0E-15)
+ #        Inner phase shift= 4.704773926285677E-02
+ #      Coulomb phase shift=-1.035839309798233E+00  (ETA=-6.064206E-01)
+   
+ # **** Schrodinger Eq. Numerical potential.
+ #      Input potential file: potential_2A1.dat   
+ #      Free state: E= 2.719449E+00, L=   5  (EPS= 1.0E-15)
+ #        Inner phase shift= 1.412167569484448E-01
+ #      Coulomb phase shift=-7.320202767858155E-01  (ETA=-4.288040E-01)
