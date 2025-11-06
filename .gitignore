@@ -2,3 +2,8 @@ fort/cLLSM
 fort/constants.mod
 fort/numpoten
 
+__pycache__
+utils/__pycache__
+
+output
+

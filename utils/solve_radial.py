@@ -35,23 +35,20 @@ def radial_inputfiles(nke_max, Ee_grid, l_max, eps, rxV_grid, rxV, Rgrid):
 
 # ---
 
-def execute_radial(rxV, l_max, FC="gfortran"):
-
-    os.system(f"{FC} -O2 numpoten.f -o numpoten")
+def execute_radial(rxV, l_max):
 
     for l in range(l_max+1):
         print(' executing RADIAL for l = {}'.format(l))
 
         inp_file = 'numpoten_l' + str(l) + ".in"
         out_file = 'numpoten_l' + str(l) + ".out"
-        dointerm = "./numpoten < " + inp_file + " > " + out_file
+        dointerm = "./fort/numpoten < " + inp_file + " > " + out_file
         os.system(dointerm)
 
-    dir_name = continuum_dir + "/"
-    dointerm = "mv SPLERR.dat potential.dat resn.dat pot-spline.dat " + dir_name
+    continuum_dir = "./output/continuum/"
+    os.makedirs(os.path.dirname(continuum_dir), exist_ok=True)
+    dointerm = "mv SPLERR.dat potential.dat resn.dat pot-spline.dat " + continuum_dir
     os.system(dointerm)
-
-    os.system("rm numpoten constants.mod")
 
 # ---
 
@@ -101,23 +98,20 @@ def get_radial_fcts(rxV, u_npt, l_max, nke_max):
 
 def man_rad(rxV, l_max, nke_max):
 
-    continuum_dir = "../output/continuum"
-    pot_file = '../fort/potential.dat'
-    dointerm = "mv " + pot_file + " " + continuum_dir
+    continuum_dir = "./output/continuum"
     os.makedirs(os.path.dirname(continuum_dir), exist_ok=True)
-    os.system(dointerm)
 
     for l in range(l_max+1):
-        inp_file = '../fort/numpoten_l'   + str(l) + ".in"
-        out_file = '../fort/numpoten_l'   + str(l) + ".out"
-        psh_file = '../fort/PhaseShift_l' + str(l) + ".dat"
+        inp_file = './numpoten_l'   + str(l) + ".in"
+        out_file = './numpoten_l'   + str(l) + ".out"
+        psh_file = './PhaseShift_l' + str(l) + ".dat"
         dir_name = continuum_dir + "/l" + str(l) + "/"
         os.makedirs(os.path.dirname(dir_name), exist_ok=True)
         dointerm = "mv " + inp_file + " " + out_file + " " + psh_file + " " + dir_name
         os.system(dointerm)
 
         for i in range(nke_max):
-            f_name = '../fort/l' + str(l) + '_k' + str(i+1) + ".dat"
+            f_name = './l' + str(l) + '_k' + str(i+1) + ".dat"
             dointerm = "mv " + f_name + " " + dir_name
             os.system(dointerm)
 
@@ -125,7 +119,7 @@ def man_rad(rxV, l_max, nke_max):
 
 def plot_rad_func(Rgrid, rad_func, l_max, nke_max):
 
-    continuum_dir = "../output/continuum"
+    continuum_dir = "./output/continuum"
 
     for l in range(l_max+1):
 

@@ -33,7 +33,7 @@ program call_cLLSM
   allocate(expo(ng,0:l_max))
   do l = 0, l_max
     write(charI, '(I5)') l
-    write(name_file, '("../cGTOs/expo/set_3/expo_l", A, ".txt")') trim(adjustl(charI))
+    write(name_file, '("./cGTOs/expo/set_3/expo_l", A, ".txt")') trim(adjustl(charI))
     open(unit = 11, file=name_file, action="read")
       do i = 1, ng
         read(11,*) expo_re, expo_im

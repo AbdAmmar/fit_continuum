@@ -38,7 +38,7 @@ if __name__=="__main__":
 
     print(" --- call RADIAL --- ")
     radial_inputfiles(nke_max, Ee_grid, l_max, eps, rxV_grid, rxV, u_grid)
-    execute_radial(rxV, l_max, FC="gfortran")
+    execute_radial(rxV, l_max)
     rad_func, rad_shif_Inner, rad_shif_Coul = get_radial_fcts(rxV, u_npt, l_max, nke_max)
     man_rad(rxV, l_max, nke_max)
     plot_rad_func(u_grid, rad_func, l_max, nke_max)
