@@ -117,18 +117,3 @@ def man_rad(rxV, l_max, nke_max):
 
 # ---
 
-def plot_rad_func(Rgrid, rad_func, l_max, nke_max):
-
-    continuum_dir = "./output/continuum"
-
-    for l in range(l_max+1):
-
-        dir_name = continuum_dir + "/l" + str(l) + "/"
-        os.makedirs(os.path.dirname(dir_name), exist_ok=True)
-
-        for i in range(nke_max):
-            f_name     = continuum_dir + 'l' + str(l) + '_k' + str(i+1) + ".pdf"
-            fig_output = dir_name + f_name
-
-# ---
-

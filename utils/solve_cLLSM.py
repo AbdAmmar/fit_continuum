@@ -3,6 +3,7 @@ import os
 import numpy as np
 
 
+# ---
 
 def run_cLLSM(Rgrid, Rmax_fit, rad_func, ng, l_max, nke_max, cusp):
 
@@ -48,3 +49,47 @@ def run_cLLSM(Rgrid, Rmax_fit, rad_func, ng, l_max, nke_max, cusp):
     os.system("rm ./my_grid.dat")
 
 # ---
+
+def read_fits(l_max, nke_max):
+
+    dir0 = "./output/continuum/l"
+    for l in range(l_max+1):
+        f_name = dir0 + str(l) + "/F_l" + str(l) + ".dat"
+        with open(f_name, 'r') as file:
+            lines = file.readlines()
+            _n_pt = len(lines)
+
+    fit_grd = np.zeros((_n_pt))
+    fit_ref = np.zeros((_n_pt, l_max+1, nke_max), dtype=complex)
+    fit_res = np.zeros((_n_pt, l_max+1, nke_max), dtype=complex)
+
+    for l in range(l_max+1):
+        f_name = dir0 + str(l) + "/F_l" + str(l) + ".dat"
+        with open(f_name, 'r') as file:
+            lines = file.readlines()
+            for i,line in enumerate(lines):
+                _line = line.split()
+                fit_grd[i] = _line[0]
+
+    for l in range(l_max+1):
+
+        f_name = dir0 + str(l) + "/F_l" + str(l) + ".dat"
+        with open(f_name, 'r') as file:
+            lines = file.readlines()
+            for i,line in enumerate(lines):
+                _line = line.split()
+                for _nke in range(nke_max):
+                    fit_ref[i,l,_nke] = float(_line[2 * _nke + 1]) + 1j * float(_line[2 * _nke + 2])
+
+        f_name = dir0 + str(l) + "/Fit_l" + str(l) + ".dat"
+        with open(f_name, 'r') as file:
+            lines = file.readlines()
+            for i,line in enumerate(lines):
+                _line = line.split()
+                for _nke in range(nke_max):
+                    fit_res[i,l,_nke] = float(_line[2 * _nke + 1]) + 1j * float(_line[2 * _nke + 2])
+
+    return fit_grd, fit_ref, fit_res
+
+# ---
+

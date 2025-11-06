@@ -5,8 +5,9 @@ from INPUT_OPT import l_max, nke_max, ke_grid, Ee_grid
 from INPUT_OPT import pot_type
 
 from utils.potent_model import generate_coulomb
-from utils.solve_radial import radial_inputfiles, execute_radial, get_radial_fcts, man_rad, plot_rad_func
-from utils.solve_cLLSM import run_cLLSM
+from utils.solve_radial import radial_inputfiles, execute_radial, get_radial_fcts, man_rad
+from utils.solve_cLLSM import run_cLLSM, read_fits
+from utils.plots import plot_rad_func, plot_fit
 
 import numpy as np
 import time
@@ -42,13 +43,15 @@ if __name__=="__main__":
     rad_func, rad_shif_Inner, rad_shif_Coul = get_radial_fcts(rxV, u_npt, l_max, nke_max)
     man_rad(rxV, l_max, nke_max)
     plot_rad_func(u_grid, rad_func, l_max, nke_max)
-    print(" ")
 
     # optimise linear coefficients
     # if cusp = 1, add r^{l+1} in the Gaussian representation
     run_cLLSM(u_grid, Rmax_fit, rad_func, ng, l_max, nke_max, cusp)
 
-    print(" --- done work after {} minutes --- ".format((time.time()-t_beg)/60.))
+    fit_grid, fit_ref, fit_res = read_fits(l_max, nke_max)
+    plot_fit(fit_grid, fit_ref, fit_res, l_max, nke_max)
+
+    print(" --- done after {:.2f} minutes --- ".format((time.time() - t_beg)/60.0))
 
 
 
