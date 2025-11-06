@@ -2,7 +2,6 @@
 import os
 import numpy as np
 
-from utils import continuum_dir 
 
 
 def run_cLLSM(Rgrid, Rmax_fit, rad_func, ng, l_max, nke_max, cusp):
@@ -25,30 +24,27 @@ def run_cLLSM(Rgrid, Rmax_fit, rad_func, ng, l_max, nke_max, cusp):
                 for i in range(Rnpt_fit):
                     f.write(' {:e} \n'.format(rad_func[i,l,j]))
 
-    os.system("ifort -mkl -O2 cLLSM.f90 -o cLLSM")
     print('optimise linear coefficients')
-    dointerm = "./cLLSM " + " < " + inp_cLLSM
-    os.system(dointerm)
+    os.system("../fort/cLLSM " + " < " + inp_cLLSM)
 
-    dointerm = "mv " + inp_cLLSM + " " + continuum_dir
-    os.system(dointerm)
+    continuum_dir = "../output/continuum"
+    os.system(f"mv ../fort/{inp_cLLSM} {continuum_dir}")
 
     for l in range(l_max+1):
 
         dir_name = continuum_dir + "/l" + str(l) + "/"
-        f0 = "coeff_l" + str(l) + ".dat"
-        f1 = "F_l"     + str(l) + ".dat"
-        f2 = "Fit_l"   + str(l) + ".dat"
-        f3 = "Err_l"   + str(l) + ".dat"
+        os.system(f"mkdir -p {dir_name}")
+        f0 = "../fort/coeff_l" + str(l) + ".dat"
+        f1 = "../fort/F_l"     + str(l) + ".dat"
+        f2 = "../fort/Fit_l"   + str(l) + ".dat"
+        f3 = "../fort/Err_l"   + str(l) + ".dat"
         dointerm = "mv " + f0 + " " + f1 + " " + f2 + " " + f3 + " " + dir_name
         os.system(dointerm)
 
-        f_name = "radfunc_l" + str(l) + ".dat"
+        f_name = "../fort/radfunc_l" + str(l) + ".dat"
         dointerm = "rm " + f_name
         os.system(dointerm)
 
-    os.system("rm cLLSM my_grid.dat")
-# -------------------------------------------------------------------------------------------------
+    os.system("rm ../fort/my_grid.dat")
 
 # ---
-

@@ -2,7 +2,6 @@
 import os
 import numpy as np
 
-from utils import continuum_dir
 
 
 def radial_inputfiles(nke_max, Ee_grid, l_max, eps, rxV_grid, rxV, Rgrid):
@@ -102,23 +101,23 @@ def get_radial_fcts(rxV, u_npt, l_max, nke_max):
 
 def man_rad(rxV, l_max, nke_max):
 
-    dir_name = continuum_dir + "/"
-    pot_file = 'potential.dat'
-    dointerm = "mv " + pot_file + " " + dir_name
-    os.makedirs(os.path.dirname(dir_name), exist_ok=True)
+    continuum_dir = "../output/continuum"
+    pot_file = '../fort/potential.dat'
+    dointerm = "mv " + pot_file + " " + continuum_dir
+    os.makedirs(os.path.dirname(continuum_dir), exist_ok=True)
     os.system(dointerm)
 
     for l in range(l_max+1):
-        inp_file = 'numpoten_l'   + str(l) + ".in"
-        out_file = 'numpoten_l'   + str(l) + ".out"
-        psh_file = 'PhaseShift_l' + str(l) + ".dat"
+        inp_file = '../fort/numpoten_l'   + str(l) + ".in"
+        out_file = '../fort/numpoten_l'   + str(l) + ".out"
+        psh_file = '../fort/PhaseShift_l' + str(l) + ".dat"
         dir_name = continuum_dir + "/l" + str(l) + "/"
         os.makedirs(os.path.dirname(dir_name), exist_ok=True)
         dointerm = "mv " + inp_file + " " + out_file + " " + psh_file + " " + dir_name
         os.system(dointerm)
 
         for i in range(nke_max):
-            f_name = 'l' + str(l) + '_k' + str(i+1) + ".dat"
+            f_name = '../fort/l' + str(l) + '_k' + str(i+1) + ".dat"
             dointerm = "mv " + f_name + " " + dir_name
             os.system(dointerm)
 
@@ -126,13 +125,15 @@ def man_rad(rxV, l_max, nke_max):
 
 def plot_rad_func(Rgrid, rad_func, l_max, nke_max):
 
+    continuum_dir = "../output/continuum"
+
     for l in range(l_max+1):
 
         dir_name = continuum_dir + "/l" + str(l) + "/"
         os.makedirs(os.path.dirname(dir_name), exist_ok=True)
 
         for i in range(nke_max):
-            f_name     = 'l' + str(l) + '_k' + str(i+1) + ".pdf"
+            f_name     = continuum_dir + 'l' + str(l) + '_k' + str(i+1) + ".pdf"
             fig_output = dir_name + f_name
 
 # ---
